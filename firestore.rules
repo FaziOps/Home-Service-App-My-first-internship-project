@@ -1,0 +1,31 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Any signed-in user can read the catalog — needed for the Home screen.
+    // Writes (used by the Admin Panel form) are restricted to accounts
+    // whose UID appears in the `admins` collection below.
+    //
+    // The PRD does not define an admin role, so this is the minimum bar
+    // to stop any logged-in user from writing to `services` through the
+    // Admin Panel route or directly via the SDK. Without this rule, the
+    // in-app Admin Panel is security theater — the route is just a UI
+    // convenience, not an access boundary.
+    match /services/{serviceId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null &&
+                      exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    match /admins/{uid} {
+      allow read: if request.auth != null;
+      allow write: if false; // manage this collection from the console only
+    }
+
+    match /users/{uid} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+    }
+  }
+}
