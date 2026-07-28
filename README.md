@@ -33,6 +33,7 @@ flutterfire configure   # select/create your Firebase project, overwrites fireba
 
 In the Firebase console:
 - Enable **Authentication → Email/Password**
+- Enable **Authentication → Phone no/OTP**
 - Create **Firestore Database** (production mode)
 - Deploy `firestore.rules` (or paste them into the console's Rules tab)
 - Add your own UID as a document in `admins/{your-uid}` so you can use the Admin Panel
