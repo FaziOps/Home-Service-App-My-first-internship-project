@@ -13,6 +13,7 @@ This was written in a sandbox with no Flutter SDK and no access to pub.dev, so *
 
 ## Gaps you should know about now, not after you've built it
 
+
 1. **OTP screen — not built.** Your screenshots show a phone-number + OTP verification step. The PRD's written requirements say email/password only. I built email/password (matches the spec you wrote, not the spec implied by the screenshot) because a fake OTP screen that doesn't actually verify anything is worse than no OTP screen — it would look done and not be done. If you actually need phone auth, that's Firebase Phone Auth with reCAPTCHA/SMS quotas — a separate, non-trivial piece of work. Say so and I'll scope it properly.
 
 2. **"Book This Service" button does nothing but show a snackbar.** Booking/scheduling was never in your PRD's scope (section 3 stops at "Detail Inspection Window"). I didn't invent a fake booking flow to look more complete.
@@ -22,6 +23,7 @@ This was written in a sandbox with no Flutter SDK and no access to pub.dev, so *
 4. **`firebase_options.dart` is a placeholder.** The app will not connect to Firebase until you run `flutterfire configure` against your own project. This isn't optional — nothing works without it.
 
 5. **Admin Panel has no access control by default.** Right now it's a screen anyone in the app can navigate to from the Home screen's top bar. I added `firestore.rules` that restricts writes to a whitelisted `admins` collection — **you need to deploy those rules and manually add your own UID to `admins/{uid}` in the console**, or any signed-in user can add/delete services. If this is genuinely admin-only tooling, it also shouldn't ship inside the same binary as the consumer app long-term — that's a call for you to make, not something I decided silently.
+
 
 ## Setup
 
@@ -50,5 +52,6 @@ flutter run
 3. Add a service: title, description, price 500, category "Plumbing".
 4. Go back to Home — it should appear under "Plumbing" within seconds (it's a live `snapshots()` stream, not a manual refresh).
 5. Tap it — details screen should show the same title/price/description.
+
 
 If step 4 doesn't happen instantly, the most likely cause is Firestore rules blocking the read, not the app code — check the console's rules simulator first.
