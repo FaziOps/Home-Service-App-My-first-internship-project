@@ -9,7 +9,8 @@ Full Flutter source for:
 - Service Details screen — full description/price from Firestore
 - Admin Panel screen — form to add services, live list with delete, writes straight to Firestore
 
-This was written in a sandbox with no Flutter SDK and no access to pub.dev, so **none of it has been compiled**. Treat it as a strong first draft, not a verified build. Run `flutter analyze` and `flutter pub get` locally before trusting it.
+This was written in a sandbox with no Flutter SDK and no access to pub.dev, so **none of it has been compiled**. 
+Treat it as a strong first draft, not a verified build. Run `flutter analyze` and `flutter pub get` locally before trusting it.
 
 ## Gaps you should know about now, not after you've built it
 
@@ -30,7 +31,7 @@ This was written in a sandbox with no Flutter SDK and no access to pub.dev, so *
 ```bash
 flutter pub get
 dart pub global activate flutterfire_cli
-flutterfire configure   # select/create your Firebase project, overwrites firebase_options.dart
+flutterfire configure        # select/create your Firebase project, overwrites firebase_options.dart
 ```
 
 In the Firebase console:
