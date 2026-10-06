@@ -15,7 +15,6 @@ Treat it as a strong first draft, not a verified build. Run `flutter analyze` an
 
 ## Gaps you should know about now, not after you've built it
 
-
 1. **OTP screen — not built.** Your screenshots show a phone-number + OTP verification step. The PRD's written requirements say email/password only. I built email/password (matches the spec you wrote, not the spec implied by the screenshot) because a fake OTP screen that doesn't actually verify anything is worse than no OTP screen — it would look done and not be done. If you actually need phone auth, that's Firebase Phone Auth with reCAPTCHA/SMS quotas — a separate, non-trivial piece of work. Say so and I'll scope it properly.
 
 2. **"Book This Service" button does nothing but show a snackbar.** Booking/scheduling was never in your PRD's scope (section 3 stops at "Detail Inspection Window"). I didn't invent a fake booking flow to look more complete.
